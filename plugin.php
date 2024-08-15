@@ -16,7 +16,7 @@ function devblog_register_plugin_templates() {
 	// Post template
 	wp_register_block_template( 'devblog-plugin-templates//single-canvas', [
 		'title'       => __( 'Single: Canvas', 'devblog-plugin-templates' ),
-		'description' => __( 'An empty template for use with single posts. Includes the Header and Footer only.', 'devblog-plugin-templates' ),
+		'description' => __( 'An open template for use with single posts. Includes the Header, Post Content, and Footer.', 'devblog-plugin-templates' ),
 		'post_types'  => [ 'post' ],
 		'content'     => devblog_get_template_content( 'single-canvas.php' )
 	] );
@@ -74,10 +74,9 @@ function devblog_get_template_content( $template ) {
 add_filter( 'template_include', 'devblog_template_include' );
 
 function devblog_template_include( $template ) {
-
 	if (
 		! isset( $_GET['all-categories'] )
-		|| 1 !== absint($_GET['all-categories'])
+		|| 1 !== absint( $_GET['all-categories'] )
 	) {
 		return $template;
 	}
@@ -93,7 +92,7 @@ function devblog_template_include( $template ) {
 
 	// Pass the result into the block template locator and let it figure
 	// out whether block templates are supported and this template exists.
-	$template = locate_block_template( $template, 'changelog', $templates );
+	$template = locate_block_template( $template, 'all-categories', $templates );
 
 	return $template;
 }
