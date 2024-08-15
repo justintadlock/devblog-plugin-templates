@@ -21,6 +21,13 @@ function devblog_register_plugin_templates() {
 		'content'     => devblog_get_template_content( 'single-canvas.php' )
 	] );
 
+	// Book archive template.
+	wp_register_block_template( 'devblog-plugin-templates//archive-book', [
+		'title'       => __( 'Book Archive', 'devblog-plugin-templates' ),
+		'description' => __( 'Displays an archive of all book posts.', 'devblog-plugin-templates' ),
+		'content'     => devblog_get_template_content( 'archive-book.php' )
+	] );
+
 	// Virtual template
 	wp_register_block_template( 'devblog-plugin-templates//all-categories', [
 		'title'       => __( 'All Categories', 'devblog-plugin-templates' ),
@@ -95,4 +102,23 @@ function devblog_template_include( $template ) {
 	$template = locate_block_template( $template, 'all-categories', $templates );
 
 	return $template;
+}
+
+// Register book CPT.
+add_action( 'init', 'devblog_register_book_type' );
+
+function devblog_register_book_type() {
+	register_post_type( 'book', [
+		'public'             => true,
+		'show_in_rest'       => true,
+		'capability_type'    => 'post',
+		'has_archive'        => 'books',
+		'menu_icon'          => 'dashicons-book',
+		'supports'           => [ 'editor', 'excerpt', 'title', 'thumbnail' ],
+		'labels'             => [
+			'name'          => __( 'Books',        'devblog-plugin-templates' ),
+			'singular_name' => __( 'Book',         'devblog-plugin-templates' ),
+			'add_new'       => __( 'Add New Book', 'devblog-plugin-templates' )
+		]
+	] );
 }
