@@ -6,7 +6,9 @@
 	<!-- wp:group {"layout":{"type":"constrained"}} -->
 	<div class="wp-block-group">
 
-		<!-- wp:paragraph --><p>This is a plugin-registered template.</p><!-- /wp:paragraph -->
+		<!-- wp:paragraph -->
+		<p><?php esc_html__( 'This is a plugin-registered template.', 'devblog-plugin-templates' ); ?></p>
+		<!-- /wp:paragraph -->
 
 	</div>
 	<!-- /wp:group -->

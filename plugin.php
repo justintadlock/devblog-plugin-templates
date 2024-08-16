@@ -13,12 +13,12 @@ add_action( 'init', 'devblog_register_plugin_templates' );
 
 function devblog_register_plugin_templates() {
 
-	// Post template
-	wp_register_block_template( 'devblog-plugin-templates//single-canvas', [
-		'title'       => __( 'Single: Canvas', 'devblog-plugin-templates' ),
+	// Book custom single template
+	wp_register_block_template( 'devblog-plugin-templates//book-canvas', [
+		'title'       => __( 'Book: Canvas', 'devblog-plugin-templates' ),
 		'description' => __( 'An open template for use with single posts. Includes the Header, Post Content, and Footer.', 'devblog-plugin-templates' ),
-		'post_types'  => [ 'post' ],
-		'content'     => devblog_get_template_content( 'single-canvas.php' )
+		'post_types'  => [ 'book' ],
+		'content'     => devblog_get_template_content( 'book-canvas.php' )
 	] );
 
 	// Book archive template.
@@ -42,6 +42,9 @@ function devblog_register_plugin_templates() {
 		'content'     => devblog_get_template_content( 'example.php' )
 	] );
 
+	// Step 4: Unregister.
+	//wp_unregister_block_template( 'devblog-plugin-templates//example' );
+
 	// Step 2: Messy way:
 	/*
 	wp_register_block_template( 'devblog-plugin-templates//example', [
@@ -53,7 +56,9 @@ function devblog_register_plugin_templates() {
 			<main class="wp-block-group">
 				<!-- wp:group {"layout":{"type":"constrained"}} -->
 				<div class="wp-block-group">
-					<!-- wp:paragraph --><p>This is a plugin-registered template.</p><!-- /wp:paragraph -->
+					<!-- wp:paragraph -->
+					<p>This is a plugin-registered template.</p>
+					<!-- /wp:paragraph -->
 				</div>
 				<!-- /wp:group -->
 			</main>
@@ -114,6 +119,7 @@ function devblog_register_book_type() {
 		'capability_type'    => 'post',
 		'has_archive'        => 'books',
 		'menu_icon'          => 'dashicons-book',
+		'rewrite'            => [ 'slug' => 'books' ],
 		'supports'           => [ 'editor', 'excerpt', 'title', 'thumbnail' ],
 		'labels'             => [
 			'name'          => __( 'Books',        'devblog-plugin-templates' ),

@@ -10,8 +10,8 @@
 		<div style="height:var(--wp--preset--spacing--50)" aria-hidden="true" class="wp-block-spacer"></div>
 		<!-- /wp:spacer -->
 
-		<!-- wp:heading -->
-		<h2 class="wp-block-heading"><?php esc_html_e( 'Categories', 'devblog-plugin-templates' ); ?></h2>
+		<!-- wp:heading {"level":1} -->
+		<h1 class="wp-block-heading"><?php esc_html_e( 'Categories', 'devblog-plugin-templates' ); ?></h1>
 		<!-- /wp:heading -->
 
 		<!-- wp:categories {"showHierarchy":true,"showPostCounts":true,"className":""} /-->
